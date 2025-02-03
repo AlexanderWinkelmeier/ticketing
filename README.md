@@ -12,6 +12,7 @@ This project demonstrates how to build, deploy, and scale an E-Commerce applicat
 - **Cookie-session** for session management in the backend
 - **Docker** for containerization of services
 - **Kubernetes** for orchestration and scaling of containers
+- **node-nats-streaming** for event-driven communication between microservices
 
 ## Features
 
