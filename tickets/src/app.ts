@@ -11,7 +11,7 @@ import {
 import { createTicketRouter } from './routes/new';
 import { showTicketRouter } from './routes/show';
 import { indexTicketRouter } from './routes';
-import { updateTicketRouter } from './routes/upddate';
+import { updateTicketRouter } from './routes/update';
 
 const app = express();
 
