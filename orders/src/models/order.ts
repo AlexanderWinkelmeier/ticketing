@@ -1,10 +1,9 @@
+import { updateIfCurrentPlugin } from 'mongoose-update-if-current';
 import mongoose from 'mongoose';
 import { OrderStatus } from '@rawrawtickets/common';
 import { TicketDoc } from './ticket';
-
 export { OrderStatus };
 
-// properties of a single order, i.e. properties zu create an ordr
 interface OrderAttrs {
   userId: string;
   status: OrderStatus;
@@ -12,15 +11,14 @@ interface OrderAttrs {
   ticket: TicketDoc;
 }
 
-// properties of a single record (document) in the database, i.e. properties of an order ends up
 interface OrderDoc extends mongoose.Document {
   userId: string;
   status: OrderStatus;
   expiresAt: Date;
   ticket: TicketDoc;
+  version: number;
 }
 
-// properties of the whole model
 interface OrderModel extends mongoose.Model<OrderDoc> {
   build(attrs: OrderAttrs): OrderDoc;
 }
@@ -55,8 +53,11 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
-// typechecking
-orderSchema.statics.build = (attrs: OrderAttrs) => new Order(attrs);
+orderSchema.set('versionKey', 'version');
+orderSchema.plugin(updateIfCurrentPlugin);
+orderSchema.statics.build = (attrs: OrderAttrs) => {
+  return new Order(attrs);
+};
 
 const Order = mongoose.model<OrderDoc, OrderModel>('Order', orderSchema);
 
