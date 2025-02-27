@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default ({ req }) => {
+export const buildClient = ({ req }) => {
   if (typeof window === 'undefined') {
     // we are on the server
     return axios.create({

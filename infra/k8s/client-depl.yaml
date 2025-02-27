@@ -15,7 +15,9 @@ spec:
       containers:
         - name: client
           image: rawraw/client
-
+          env:
+            - name: NEXT_PUBLIC_STRIPE_PUBLIC_KEY
+              value: 'pk_test_51QuTddLOsbLZ53QyJda9OChvk6rw2SApitBSPyN9wHxvz6vHyi6RyAqj5hh0xHZLdq2X3IKr39n654XsVsxZAexc00v06vmUsU'
 ---
 apiVersion: v1
 kind: Service
